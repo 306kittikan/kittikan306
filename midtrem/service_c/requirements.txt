@@ -3,3 +3,24 @@ uvicorn
 grpcio
 grpcio-tools
 requests
+# ========== REQUIREMENTS FOR SERVICE C EXPLANATION ==========
+# Service C: REST client service ที่เชื่อมต่อ Service A ผ่าน REST API
+# 
+# FastAPI Framework:
+#   - ใช้สำหรับสร้าง REST API endpoint
+#   - Client ส่ง request ไปยัง Service C ผ่าน REST
+#   - Service C ส่งต่อไปยัง Service A ผ่าน REST
+# 
+# Uvicorn Web Server:
+#   - ASGI server ที่รัน FastAPI
+#   - ใช้สำหรับ listen บน port 8002
+#   - รองรับ HTTP protocol
+# 
+# gRPC (grpcio) & grpcio-tools:
+#   - (ไม่ใช้โดยตรงใน Service C)
+#   - เก็บไว้เพื่อมิเจอ module error ระหว่าง import
+# 
+# Requests Library:
+#   - ใช้สำหรับส่ง HTTP GET request ไปยัง Service A
+#   - เชื่อมต่อไปยัง Service A บน http://service_a:8000
+#   - รับ response และ parse JSON

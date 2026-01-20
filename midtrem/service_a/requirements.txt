@@ -3,3 +3,28 @@ uvicorn
 grpcio
 grpcio-tools
 requests
+# ========== REQUIREMENTS FOR SERVICE A EXPLANATION ==========
+# Service A: Backend service ที่ให้บริการข้อมูลหนังทั้ง gRPC และ REST API
+# 
+# FastAPI Framework:
+#   - ใช้สำหรับสร้าง REST API
+#   - มี built-in support สำหรับ async/await
+#   - auto-generate OpenAPI documentation
+# 
+# Uvicorn Web Server:
+#   - ASGI server ที่รัน FastAPI
+#   - ใช้ async I/O สำหรับ high performance
+#   - รองรับ HTTP, HTTPS, WebSocket
+# 
+# gRPC (grpcio):
+#   - library หลักสำหรับสร้าง gRPC server/client
+#   - ใช้สำหรับสื่อสารระหว่าง microservices
+#   - protocol: ใช้ HTTP/2 ทำให้ efficient
+# 
+# gRPC Tools (grpcio-tools):
+#   - มี protoc compiler สำหรับ compile .proto files
+#   - คำสั่ง: python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. user.proto
+# 
+# Requests:
+#   - ใช้สำหรับส่ง HTTP requests
+#   - มี simple API สำหรับ GET, POST, PUT, DELETE

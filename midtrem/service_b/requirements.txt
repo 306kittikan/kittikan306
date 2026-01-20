@@ -1,5 +1,29 @@
+# ========== REQUIREMENTS FOR SERVICE B ==========
+# Service B: gRPC client service ที่เชื่อมต่อ Service A ผ่าน gRPC
+
+# FastAPI Framework
+# - ใช้สำหรับสร้าง REST API endpoint
+# - Client ส่ง request ไปยัง Service B ผ่าน REST
+# - Service B แปลงเป็น gRPC ส่งไปยัง Service A
 fastapi
+
+# Uvicorn Web Server
+# - ASGI server ที่รัน FastAPI
+# - ใช้สำหรับ listen บน port 8001
+# - รองรับ HTTP protocol
 uvicorn
+
+# gRPC Core Library
+# - ใช้สำหรับสร้าง gRPC client
+# - เชื่อมต่อไปยัง Service A บน port 50051
+# - ส่ง/รับข้อมูลผ่าน gRPC protocol
 grpcio
+
+# gRPC Tools
+# - มี protoc compiler สำหรับ compile .proto files
+# - ที่ Service B ใช้ user_pb2 และ user_pb2_grpc ที่ compile มาแล้ว
 grpcio-tools
+
+# Requests Library
+# - (ไม่ใช้ใน Service B แต่อาจเพิ่มเข้าไว้)
 requests

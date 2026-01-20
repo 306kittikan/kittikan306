@@ -1,3 +1,84 @@
+"""
+================================
+USER SERVICE PROTOCOL BUFFER
+================================
+ไฟล์นี้เป็นคำจำกัดความของ gRPC Service ระหว่าง Services
+ใช้ protobuf (Protocol Buffers) ซึ่งเป็นรูปแบบการ serialize ข้อมูลที่มีประสิทธิภาพ
+
+ขั้นตอนการใช้งาน:
+  1. เขียนคำจำกัดความ service และ message ใน file นี้
+  2. Compile file นี้ด้วยคำสั่ง: python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. user.proto
+  3. ได้ไฟล์ user_pb2.py และ user_pb2_grpc.py
+  4. นำไป import ในไฟล์ main.py
+"""
+
+syntax = "proto3";
+# syntax = "proto3": ใช้ protobuf version 3 (เป็น standard ในปัจจุบัน)
+
+package user;
+# package user: กำหนดชื่อ namespace เป็น "user"
+# ใช้เพื่อหลีกเลี่ยงการชนกันของชื่อในหลาย files
+
+# ========== gRPC SERVICE DEFINITION ==========
+# ส่วนนี้เป็นการนิยาม gRPC service interface
+service UserService {
+  # rpc = Remote Procedure Call (เมธอดที่สามารถเรียกจากระยะไกล)
+  # GetUser: ชื่อของ RPC method
+  # (UserRequest) returns (UserResponse): 
+  #   - รับ parameter ชนิด UserRequest
+  #   - ส่งกลับ response ชนิด UserResponse
+  rpc GetUser (UserRequest) returns (UserResponse);
+  # วิธีเรียก: stub.GetUser(UserRequest(user_id=1))
+}
+
+# ========== MESSAGE DEFINITIONS ==========
+# message: โครงสร้างข้อมูลที่ส่งผ่าน gRPC
+# มีลักษณะคล้าย struct ใน C หรือ dataclass ใน Python
+
+message UserRequest {
+  # เมสเสจสำหรับ request ไปยัง service
+  # ข้อมูลที่ client ส่งไปเพื่อขอรับข้อมูล
+  
+  int32 user_id = 1;
+  # int32 user_id: ประเภท int32 ชื่อ user_id
+  # = 1: field number (ใช้สำหรับ serialization)
+  # 
+  # ใน Python จะใช้ได้เป็น: UserRequest(user_id=123)
+}
+
+message UserResponse {
+  # เมสเสจสำหรับ response จาก service
+  # ข้อมูลที่ service ส่งกลับมา
+  
+  string user_name = 1;
+  # string user_name: ประเภท string ชื่อ user_name
+  # = 1: field number
+  # ที่นี้ใช้เป็นชื่อหนัง (title)
+  
+  string email = 2;
+  # string email: ประเภท string ชื่อ email
+  # = 2: field number (ต้องไม่ซ้ำกับ field อื่น)
+  # ที่นี้ใช้เป็นชื่อผู้กำกับ (director)
+  
+  bool is_active = 3;
+  # bool is_active: ประเภท boolean ชื่อ is_active
+  # = 3: field number
+  # ใช้เป็นสถานะว่าหนังยังใช้งานได้หรือไม่
+}
+
+# ========== COMPILATION ==========
+# เมื่อ compile file นี้ จะได้:
+# 
+# 1. user_pb2.py:
+#    - User request/response message classes
+#    - ใช้สำหรับสร้างและ parse messages
+#
+# 2. user_pb2_grpc.py:
+#    - UserServiceServicer: base class สำหรับ server
+#    - UserServiceStub: client proxy สำหรับเรียก RPC
+#    - add_UserServiceServicer_to_server: function ลงทะเบียน service
+"""
+
 syntax = "proto3";
 
 package user;

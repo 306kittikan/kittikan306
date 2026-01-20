@@ -17,4 +17,8 @@ services:
     ports:
       - "8002:8002"
     depends_on:
-      - service_a
+      - service_a 
+#เมื่อร RUN docker-composeแล้วสามารถเข้าถึง service ได้ด้วย localhost ดังกล่าวได้
+#http://service_b:8000/user/1
+#http://service_b:8001/user/1
+#http://service_b:8002/user/1
