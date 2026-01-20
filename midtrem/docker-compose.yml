@@ -1,0 +1,20 @@
+services:
+  service_a:
+    build: ./service_a
+    ports:
+      - "8000:8000"   # REST Port
+      - "50051:50051" # gRPC Port
+
+  service_b:
+    build: ./service_b
+    ports:
+      - "8001:8001"
+    depends_on:
+      - service_a
+
+  service_c:
+    build: ./service_c
+    ports:
+      - "8002:8002"
+    depends_on:
+      - service_a

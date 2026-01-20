@@ -1,0 +1,28 @@
+{
+    "movies": [
+        {
+            "movie_id": 1,
+            "title": "Ben 10: Secret of the Omnitrix",
+            "release_year": 2007,
+            "director": "Sebastian Montes",
+            "rating": 7.3,
+            "description": "Ben must find the creator of the Omnitrix to stop a self-destruct sequence."
+        },
+        {
+            "movie_id": 2,
+            "title": "Ben 10: Race Against Time",
+            "release_year": 2007,
+            "director": "Alex Winter",
+            "rating": 4.1,
+            "description": "Ben returns to his hometown and is hunted by Eon, an alien from another dimension."
+        },
+        {
+            "movie_id": 3,
+            "title": "Ben 10: Alien Swarm",
+            "release_year": 2009,
+            "director": "Alex Winter",
+            "rating": 4.7,
+            "description": "Ben and his team must stop a global threat involving nano-sized alien chips."
+        }
+    ]
+}
